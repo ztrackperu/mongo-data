@@ -1,0 +1,45 @@
+use("platzi_store")
+
+db.createCollection('users', {
+    //validar los documentos de una coleccion
+    validator: {
+        // el operador jsonSchema nos define la estructura
+        //que debe tener en este caso users
+        $jsonSchema: {
+            //bson soporta mas tipos de datos
+            bsonType: 'object',
+            //propiedades obligatorias 
+            required: ['email', 'password', 'role'],
+            //propiedades de la colecciones
+            properties: {
+                //name es tipo string de bson
+                name: {
+                    bsonType: 'string'
+                },
+                last_name: {
+                    bsonType: 'string'
+                },
+                email: {
+                    bsonType: 'string'
+                },
+                password: {
+                    bsonType: 'string'
+                },
+                //validar un numero entre 18 y 99
+                age: {
+                    bsonType: 'number',
+                    minimum: 18,
+                    maximum: 99
+                },
+                // es un boleano false o true
+                isSingle: {
+                    bsonType: 'bool'
+                },
+                //enum es una serie de opciones limitadas
+                role: {
+                    enum: ['customer', 'seller', 'admin']
+                }
+            }
+        }
+    }
+})

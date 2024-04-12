@@ -1,0 +1,10 @@
+use("platzi_store")
+
+db.users.insertOne({
+    email: 'nico@gmail.com',
+    password: 'Azas1jhjsd87987sdA',
+    role: 'admin',
+    //inventamos un nuevo campo que no esta en la validacion
+    
+    social_accounts: ['twitter', 'facebook']
+})

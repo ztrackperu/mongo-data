@@ -1,0 +1,45 @@
+use("platzi_store")
+//CUANDO LA BASE DE DATOS YA TIENE UNA ARQUITECTURA DATA
+//dime cuales son la informacion de las colecciones
+//que tienes
+db.getCollectionInfos()
+//para actualizar debemos enviar toda la definicion
+//runcomand es para actualizar el schema 
+db.runCommand({
+    //el schema de users
+    collMod: 'users',
+    //envio la estructura
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['email', 'password', 'role'],
+            additionalProperties: true,
+            properties: {
+                name: {
+                    bsonType: 'string'
+                },
+                last_name: {
+                    bsonType: 'string'
+                },
+                email: {
+                    bsonType: 'string'
+                },
+                password: {
+                    bsonType: 'string',
+                    pattern: "^[A-Za-z0-9]{8,}$"
+                },
+                age: {
+                    bsonType: 'number',
+                    minimum: 18,
+                    maximum: 99
+                },
+                isSingle: {
+                    bsonType: 'bool'
+                },
+                role: {
+                    enum: ['customer', 'seller', 'admin']
+                }
+            }
+        }
+    }
+})
